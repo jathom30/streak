@@ -2,7 +2,6 @@ export type TData = {
   id: string;
   label: string;
   variant: string;
-  options?: string[];
 };
 
 export type TFilter = {
