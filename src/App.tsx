@@ -87,7 +87,13 @@ function App() {
           );
         })}
         <TypeAhead
-          data={data ? Object.values(data) : []}
+          data={
+            data
+              ? Object.values(data).filter((datum) =>
+                  filters.every((filter) => filter.id !== datum.id)
+                )
+              : []
+          }
           showResults={showResults}
           setShowResults={setShowResults}
           onItemClick={handleAddItem}
