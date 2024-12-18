@@ -26,7 +26,7 @@ export const Filters = ({
   isLoading?: boolean;
   data?: Record<string, TData>;
 }) => {
-  const [open, setOpen] = useState(false);
+  const [showResults, setShowResults] = useState(false);
   const [openChip, setOpenChip] = useState<string>();
   const {
     query,
@@ -61,7 +61,7 @@ export const Filters = ({
   const handleAddItem = (data: TFilter) => {
     onFilterChange((prev) => [...prev, data]);
     setOpenChip(data.id);
-    setOpen(false);
+    setShowResults(false);
     setQuery("");
   };
 
@@ -80,7 +80,9 @@ export const Filters = ({
     return { id: item.id, values };
   };
 
-  const outsideRef = useClickOutside<HTMLUListElement>(() => setOpen(false));
+  const outsideRef = useClickOutside<HTMLUListElement>(() =>
+    setShowResults(false)
+  );
 
   return (
     <div className="flex flex-wrap gap-1 items-center border p-1 rounded">
@@ -97,7 +99,7 @@ export const Filters = ({
             key={id}
             label={<ChipLabel item={item} values={values} />}
             open={openChip === id}
-            setOpen={(open) => setOpenChip(open ? id : undefined)}
+            toggleOpen={() => setOpenChip(openChip === id ? undefined : id)}
           >
             <ChipForm
               item={item}
@@ -117,9 +119,11 @@ export const Filters = ({
                     value: Number(values?.value),
                   }}
                 />
-              ) : item.variant === "boolean" ? (
+              ) : null}
+              {item.variant === "boolean" ? (
                 <BooleanFormBody defaultValues={Boolean(values?.value)} />
-              ) : item.variant === "date" ? (
+              ) : null}
+              {item.variant === "date" ? (
                 <DateFormBody
                   defaultValues={{
                     operator: values?.operator,
@@ -137,9 +141,9 @@ export const Filters = ({
           className="px-1 focus:outline-none"
           placeholder="Filter by..."
           onChange={(e) => setQuery(e.target.value)}
-          onFocus={() => setOpen(true)}
+          onFocus={() => setShowResults(true)}
         />
-        {open || query.length ? (
+        {showResults || query.length ? (
           <ul
             className="absolute flex flex-col border rounded bg-white top-[calc(100%+6px)] -left-1 min-w-40"
             ref={outsideRef}

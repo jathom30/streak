@@ -30,18 +30,10 @@ const available: TData = {
   variant: "date",
 };
 
-const fruit: TData = {
-  id: "fruit",
-  label: "Fruit",
-  variant: "string-array",
-  options: ["Banana", "Apple", "Orange"],
-};
-
 export const data: Record<string, TData> = {
   carrots,
   broccoli,
   fresh,
   frozen,
   available,
-  fruit,
 };

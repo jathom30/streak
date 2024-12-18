@@ -5,17 +5,17 @@ import { type ReactNode } from "react";
 
 export const Chip = ({
   open,
-  setOpen,
+  toggleOpen,
   label,
   children,
 }: {
   open: boolean;
-  setOpen: (open: boolean) => void;
+  toggleOpen: () => void;
   label: ReactNode;
   children: ReactNode;
 }) => {
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover open={open} onOpenChange={toggleOpen}>
       <PopoverTrigger>
         <Badge variant="outline">
           {label}
