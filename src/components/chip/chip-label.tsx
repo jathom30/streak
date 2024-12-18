@@ -21,7 +21,7 @@ export const ChipLabel = ({
   values,
 }: {
   item: TData;
-  values?: TFilter;
+  values?: TFilter["values"];
 }) => {
   if (!values) {
     return (

@@ -10,7 +10,7 @@ import {
 export const DateFormBody = ({
   defaultValues,
 }: {
-  defaultValues: {
+  defaultValues?: {
     operator?: string;
     value?: string;
   };

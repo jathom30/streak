@@ -7,6 +7,8 @@ export type TData = {
 
 export type TFilter = {
   id: string;
-  operator?: string;
-  value: number | boolean | string | string[];
+  values?: {
+    operator?: string;
+    value: number | boolean | string | string[];
+  };
 };

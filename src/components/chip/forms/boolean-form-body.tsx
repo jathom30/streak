@@ -9,7 +9,7 @@ import {
 export const BooleanFormBody = ({
   defaultValues,
 }: {
-  defaultValues: boolean;
+  defaultValues?: boolean;
 }) => {
   return (
     <>

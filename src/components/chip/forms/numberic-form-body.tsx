@@ -11,14 +11,14 @@ import { operators } from "./form-data-utils";
 export const NumbericFormBody = ({
   defaultValues,
 }: {
-  defaultValues: {
+  defaultValues?: {
     operator?: string;
     value?: number;
   };
 }) => {
   return (
     <>
-      <Select required defaultValue={defaultValues.operator} name="operator">
+      <Select required defaultValue={defaultValues?.operator} name="operator">
         <SelectTrigger>
           <SelectValue placeholder="Operator" />
         </SelectTrigger>
@@ -32,7 +32,7 @@ export const NumbericFormBody = ({
       </Select>
       <Input
         required
-        defaultValue={String(defaultValues.value)}
+        defaultValue={String(defaultValues?.value)}
         type="number"
         name="value"
         placeholder="numberic value"

@@ -1,19 +1,19 @@
 import { ChevronDown } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Badge } from "../ui/badge";
-import { type ReactNode, useState } from "react";
+import { type ReactNode } from "react";
 
 export const Chip = ({
-  defaultOpen = false,
+  open,
+  setOpen,
   label,
   children,
 }: {
-  defaultOpen?: boolean;
+  open: boolean;
+  setOpen: (open: boolean) => void;
   label: ReactNode;
-  children: ({ onClose }: { onClose: () => void }) => ReactNode;
+  children: ReactNode;
 }) => {
-  const [open, setOpen] = useState(defaultOpen);
-
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger>
@@ -23,7 +23,7 @@ export const Chip = ({
         </Badge>
       </PopoverTrigger>
       <PopoverContent side="bottom" align="start">
-        {children({ onClose: () => setOpen(false) })}
+        {children}
       </PopoverContent>
     </Popover>
   );
