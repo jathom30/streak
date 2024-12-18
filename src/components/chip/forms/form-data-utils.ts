@@ -1,19 +1,37 @@
-export const handleBooleanFormData = (data: FormData) => {
+import { TData } from "@/data-types";
+import { FormEvent } from "react";
+
+const handleBooleanFormData = (data: FormData) => {
   return { value: data.get("value") === "true" };
 };
 
-export const handleNumbericFormData = (data: FormData) => {
+const handleNumbericFormData = (data: FormData) => {
   return {
     operator: String(data.get("operator")),
     value: Number(data.get("value")),
   };
 };
 
-export const handleDateFormData = (data: FormData) => {
+const handleDateFormData = (data: FormData) => {
   return {
     operator: String(data.get("operator")),
     value: String(data.get("value")),
   };
+};
+
+export const getItemFromFormData = (
+  data: FormEvent<HTMLFormElement>,
+  item: TData
+) => {
+  const formData = new FormData(data.currentTarget);
+  const getValues = {
+    number: handleNumbericFormData,
+    boolean: handleBooleanFormData,
+    date: handleDateFormData,
+  }[item.variant];
+  const values = getValues?.(formData);
+  if (!values) return;
+  return { id: item.id, values };
 };
 
 export const operators: Record<string, string> = {
